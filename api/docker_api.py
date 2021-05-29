@@ -1,27 +1,24 @@
-import docker
-
+from exception.exception import TerminalCommandException
 from project_utils.logger import Logger
-from string_util.string_util import StringUtil
-from tests.test_data import COMMAND_TO_GET_IP_ADDRESS
 
 
-class DockerApi:
-    @staticmethod
-    def get_ip_from_docker_container(client, docker_container):
-        ip_address = str(client.containers.run(docker_container,
-                                               StringUtil.get_command_for_console(COMMAND_TO_GET_IP_ADDRESS)))
-        Logger.info(f"after executing command in terminal got next text: {ip_address}")
-        ip_address = StringUtil.get_ip_address(ip_address)
-        Logger.info(f"Got ip : {ip_address}")
-        return ip_address
+class ContainerApi:
+    def __init__(self, container):
+        self.container = container
 
-    @staticmethod
-    def stop_all_docker_containers(client):
-        Logger.info("Stop all containers")
-        for container in client.containers.list():
-            container.stop()
+    def start(self):
+        Logger.info(f"Container started: {self.container.name}\n"
+                    f"container status - {self.container.status}\n")
+        self.container.start()
 
-    @staticmethod
-    def create_docker_client():
-        Logger.info("Connect to docker")
-        return docker.from_env()
+    def stop(self):
+        self.container.stop()
+        Logger.info(f"Container stop: {self.container.name}\n")
+
+    def execute_command(self, command):
+        command_execute_is_success = 0
+        log = self.container.exec_run(command)
+        Logger.info(log.output)
+        if log.exit_code != command_execute_is_success:
+            Logger.error(f"{log.output}")
+            raise TerminalCommandException("Wrong command!")

@@ -2,7 +2,7 @@ import logging
 
 
 class Logger:
-    logger = logging.getLogger("Logger")
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
     @staticmethod
     def info(str_):
