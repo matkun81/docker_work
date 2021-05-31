@@ -8,13 +8,13 @@ class DockerApiUtils:
     def create_image(name_image, command="/bin/bash", tty=True, stdin_open=True, auto_remove=True):
         client = DockerApiUtils.create_docker_client()
         image = client.images.pull(name_image)
-        Logger.info(image.id)
+        Logger.info(f"image id : {image.id}")
         container = client.containers.create(name_image,
                                              command=command,
                                              tty=tty,
                                              stdin_open=stdin_open,
                                              auto_remove=auto_remove)
-        Logger.info(container.id)
+        Logger.info(f"Container id : {container.id}")
         return container
 
     @staticmethod

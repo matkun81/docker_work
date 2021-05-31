@@ -9,6 +9,7 @@ class UbuntuTerminalCommand:
     CHECK_PYTHON_VERSION = "python3 --version"
     INSTALL_GIT = "apt install -y git"
     CHECK_GIT_VERSION = "git --version"
+    GET_IP_ADDRESS = "hostname -I"
 
 
 class GitCommandTerminal:

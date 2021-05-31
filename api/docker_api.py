@@ -8,7 +8,7 @@ class ContainerApi:
 
     def start(self):
         Logger.info(f"Container started: {self.container.name}\n"
-                    f"container status - {self.container.status}\n")
+                    f"Container status - {self.container.status}\n")
         self.container.start()
 
     def stop(self):
@@ -18,7 +18,8 @@ class ContainerApi:
     def execute_command(self, command):
         command_execute_is_success = 0
         log = self.container.exec_run(command)
-        Logger.info(log.output)
+        Logger.info(f"Terminal command executed :{log.output}")
         if log.exit_code != command_execute_is_success:
-            Logger.error(f"{log.output}")
+            Logger.error(f"Terminal command was not executed!\n Check {log.output}")
             raise TerminalCommandException("Wrong command!")
+        return log.output
