@@ -1,10 +1,10 @@
 import allure
 import pytest
 
-from api.docker_api import ContainerApi
-from api.docker_api_utils import DockerApiUtils
-from exception.exception import TerminalCommandException
-from project_utils.logger import Logger
+from docker_task.api.docker_api import ContainerApi
+from docker_task.api.docker_api_utils import DockerApiUtils
+from docker_task.exception.exception import TerminalCommandException
+from docker_task.project_utils.logger import Logger
 from ubuntu_api.data_for_ubuntu_terminal_work import DOCKER_IMAGE, UbuntuTerminalCommand
 
 

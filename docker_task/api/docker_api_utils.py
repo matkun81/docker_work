@@ -1,6 +1,6 @@
 import docker
 
-from project_utils.logger import Logger
+from docker_task.project_utils.logger import Logger
 
 
 class DockerApiUtils:
@@ -25,7 +25,7 @@ class DockerApiUtils:
 
     @staticmethod
     def create_docker_client():
-        Logger.info("Connect to docker")
+        Logger.info("Connect to docker_task")
         return docker.from_env()
 
     @staticmethod
@@ -34,9 +34,8 @@ class DockerApiUtils:
         Logger.info(f"deleting container")
         client.images.remove(image=docker_name, force=True)
         Logger.info(f"container status - {container.status}\n")
-        Logger.info(DockerApiUtils.get_list_images())
 
     @staticmethod
     def get_list_images():
         client = DockerApiUtils.create_docker_client()
-        Logger.info(client.images.list())
+        Logger.info(f"List images: {client.images.list()}")

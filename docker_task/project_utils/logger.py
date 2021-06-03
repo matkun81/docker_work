@@ -5,11 +5,11 @@ class Logger:
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
     @staticmethod
-    def info(str_):
+    def info(str_, *args, **kwargs):
         logging.info(str_)
 
     @staticmethod
-    def error(str_):
+    def error(str_, *args, **kwargs):
         logging.error(str_)
 
     @staticmethod

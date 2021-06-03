@@ -5,7 +5,7 @@ from const.regular_exspressions import IP_ADDRESS_REG_EXP
 
 class TerminalUtil:
     @staticmethod
-    def get_ip_address(ip_from_terminal, count_symbol_from_start, count_symbol_from_end):
+    def get_ip_address(ip_from_terminal, count_symbol_from_start=2, count_symbol_from_end=4):
         ip_address = str(ip_from_terminal)
         return ip_address[count_symbol_from_start:-count_symbol_from_end]
 
