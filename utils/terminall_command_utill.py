@@ -18,3 +18,8 @@ class GitCommandTerminal:
 
 class PythonCommandTerminal:
     EXECUTE_PYTHON_FILE = f"python3 {PATH_TO_SCRIPT}"
+
+
+class TerminalCommandException(Exception):
+    def __init__(self, text_exception):
+        self.text = text_exception

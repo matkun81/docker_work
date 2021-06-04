@@ -1,6 +1,6 @@
 import docker
 
-from docker_task.project_utils.logger import Logger
+from utils.logger_util import Logger
 
 
 class DockerApiUtils:
@@ -25,7 +25,7 @@ class DockerApiUtils:
 
     @staticmethod
     def create_docker_client():
-        Logger.info("Connect to docker_task")
+        Logger.info("Connect_to_docker")
         return docker.from_env()
 
     @staticmethod

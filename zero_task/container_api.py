@@ -1,5 +1,5 @@
-from docker_task.exception.exception import TerminalCommandException
-from docker_task.project_utils.logger import Logger
+from utils.logger_util import Logger
+from utils.terminall_command_utill import TerminalCommandException
 
 
 class ContainerApi:

@@ -1,10 +1,10 @@
-from ubuntu_api.data_for_ubuntu_terminal_work import GitCommandTerminal, PythonCommandTerminal
-from ubuntu_api.terminal_util.terminal_util import TerminalUtil
+from utils.terminall_command_utill import GitCommandTerminal, PythonCommandTerminal
+from utils.terminal_string_util import TerminalUtil
 
 
 class TestDocker:
-    def test_docker(self, configure_container):
-        container = configure_container
+    def test_docker(self, configure_container_empty_image):
+        container = configure_container_empty_image
         container.execute_command(GitCommandTerminal.CLONE_REPOSITORY)
         ip_address_from_terminal = container.execute_command(PythonCommandTerminal.EXECUTE_PYTHON_FILE)
         ip_address = TerminalUtil.get_ip_address(ip_address_from_terminal, count_symbol_from_start=2,

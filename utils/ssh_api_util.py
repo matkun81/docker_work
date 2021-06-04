@@ -4,7 +4,7 @@ import paramiko
 from paramiko.ssh_exception import SSHException
 
 
-class SshApi:
+class SshApiUtil:
     @staticmethod
     def create_connection(host, user_name, password, port, max_count_attempt=5, time_out=5):
         client = paramiko.SSHClient()

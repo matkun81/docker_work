@@ -1,6 +1,6 @@
 import re
 
-from const.regular_exspressions import IP_ADDRESS_REG_EXP
+from regular_exspressions import IP_ADDRESS_REG_EXP
 
 
 class TerminalUtil:

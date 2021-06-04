@@ -1,5 +1,5 @@
-from ubuntu_api.data_for_ubuntu_terminal_work import UbuntuTerminalCommand
-from ubuntu_api.terminal_util.terminal_util import TerminalUtil
+from utils.terminall_command_utill import UbuntuTerminalCommand
+from utils.terminal_string_util import TerminalUtil
 
 
 class TestVirtualBox:
