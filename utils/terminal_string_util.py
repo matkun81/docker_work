@@ -1,6 +1,7 @@
 import re
 
 from regular_exspressions import IP_ADDRESS_REG_EXP
+from utils.logger_util import Logger
 
 
 class TerminalUtil:
@@ -10,5 +11,7 @@ class TerminalUtil:
         return ip_address[count_symbol_from_start:-count_symbol_from_end]
 
     @staticmethod
-    def check_is_ip_address(string):
+    def ip_address_is_correct(string):
+        Logger.info(f" Ip address : {string}")
+        Logger.info("Check the ip address")
         return re.match(IP_ADDRESS_REG_EXP, string)

@@ -5,18 +5,17 @@ import pytest
 import virtualbox
 
 from config.vm_config import Machine, TIME_OUT_FOR_DOWNLOAD_OS
-from utils.docker_api_utils import DockerApiUtils
+from utils.docker_api_utils import DockerClient, ContainerApi
 from utils.logger_util import Logger
 from utils.ssh_api_util import SshApiUtil
 from utils.terminall_command_utill import DOCKER_IMAGE, UbuntuTerminalCommand, TerminalCommandException
-from zero_task.container_api import ContainerApi
 
 
 @pytest.fixture(scope="class")
 def configure_container_empty_image():
     with allure.step("creating image"):
-        image = DockerApiUtils.create_image(DOCKER_IMAGE)
-        container = ContainerApi(image)
+        client = DockerClient()
+        container = client.create_container(DOCKER_IMAGE)
         container.start()
         try:
             container.execute_command(UbuntuTerminalCommand.UPDATE_APT)
@@ -30,21 +29,21 @@ def configure_container_empty_image():
 
     with allure.step("stop containers"):
         container.stop()
-        DockerApiUtils.get_list_images()
+        client.get_list_images()
 
 
 @pytest.fixture(scope="class")
 def configure_container_prepared():
     with allure.step("creating image"):
-        image = DockerApiUtils.create_image(DOCKER_IMAGE)
-        container = ContainerApi(image)
+        client = DockerClient()
+        container = client.create_container(DOCKER_IMAGE)
         container.start()
 
     yield container
 
     with allure.step("stop containers"):
         container.stop()
-        DockerApiUtils.get_list_images()
+        client.get_list_images()
 
 
 @pytest.fixture(scope="class")
@@ -62,11 +61,11 @@ def configure_virtual_box():
         session_in_vm = vm.create_session()
 
         time.sleep(TIME_OUT_FOR_DOWNLOAD_OS)
-
-        client = SshApiUtil.create_connection(Machine.HOST, Machine.USER_NAME, Machine.PASSWORD,
+        client = SshApiUtil()
+        connection = client.create_connection(Machine.HOST, Machine.USER_NAME, Machine.PASSWORD,
                                               Machine.PORT_SSH)
-    yield client
+    yield connection
 
     with allure.step("power down Virtual Box"):
-        SshApiUtil.close_connection(client)
+        client.close_connection()
         session_in_vm.console.power_down()
